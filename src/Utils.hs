@@ -1,14 +1,27 @@
 module Utils
     ( count
+    , count2
     , (!?)
     ) where
 
 {- | GHC 9 comes with @GHC.Utils.Misc.count@, this is GHC 8 tho
 -}
-count :: (a -> Bool) -> [a] -> Int
-count _ [] = 0
-count p (x : xs) | p x = count p xs + 1
-count p (_ : xs) = count p xs
+count :: (Foldable t, Num n) => (a -> Bool) -> t a -> n
+count p =
+    foldr inner 0
+    where
+        inner x a' | p x = a' + 1
+        inner _ a'       = a'
+
+count2 :: (Foldable t, Num n) => (a -> Bool) -> (a -> Bool) -> t a -> (n, n)
+count2 p q =
+    foldr inner (0, 0)
+    where
+        inner x (a', b') | p x && q x = (a' + 1, b' + 1)
+        inner x (a', b') | p x        = (a' + 1, b'    )
+        inner x (a', b') |        q x = (a'    , b' + 1)
+        inner _ (a', b')              = (a', b')
+
 
 infixl 9 !?
 -- As per https://hackage.haskell.org/package/extra-1.7.10/docs/src/Data.List.Extra.html#%21%3F
