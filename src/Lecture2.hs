@@ -25,6 +25,14 @@ module Lecture2
     , evenLists
     , dropSpaces
 
+    , makeRedDragon
+    , makeBlackDragon
+    , makeGreenDragon
+    , Gold (..)
+    , Health (..)
+    , Dragon (..)
+    , Attack (..)
+    , Endurance (..)
     , Knight (..)
     , dragonFight
 
@@ -40,8 +48,7 @@ module Lecture2
     , constantFolding
     ) where
 
-import Data.List (sort)
-import Utils ((!?), mapRight2, lookupAll, safeSum)
+import Utils ((!?), lookupAll, safeSum)
 import Data.Char (isSpace)
 
 {- | Implement a function that finds a product of all the numbers in
@@ -360,6 +367,15 @@ data BattleOutcome = Win Chest XP
                    | Fled
                    deriving (Show)
 
+makeRedDragon :: Health -> Attack -> Gold -> Treasure -> Dragon
+makeRedDragon h atk g t = RedDragon (RedDragonT { redDragonHealth = h, redDragonFirePower = atk, redDragonGold = g, redDragonTreasure = t, redDragonSlayCounter = 0 })
+
+makeBlackDragon :: Health -> Attack -> Gold -> Treasure -> Dragon
+makeBlackDragon h atk g t = BlackDragon (BlackDragonT { blackDragonHealth = h, blackDragonFirePower = atk, blackDragonGold = g, blackDragonTreasure = t, blackDragonSlayCounter = 0 })
+
+makeGreenDragon :: Health -> Attack -> Gold -> Dragon
+makeGreenDragon h atk g = GreenDragon (GreenDragonT { greenDragonHealth = h, greenDragonFirePower = atk, greenDragonGold = g, greenDragonSlayCounter = 0 })
+
 dragonFight :: Knight -> Dragon -> BattleOutcome
 dragonFight k _ | dead k = Loss
 dragonFight _ d | dead d = Win (dragonChest d) (dragonExperience d)
@@ -545,14 +561,14 @@ constantFolding expr =
             inner []
             where
                 inner acc (Lit a) = a : acc
-                inner acc (Var a) = acc
+                inner acc (Var _) = acc
                 inner acc (Add a b) = inner [] a ++ inner [] b ++ acc
 
         variablesOf :: Expr -> [String]
         variablesOf =
             inner []
             where
-                inner acc (Lit a) = acc
+                inner acc (Lit _) = acc
                 inner acc (Var a) = a : acc
                 inner acc (Add a b) = inner [] a ++ inner [] b ++ acc
 
