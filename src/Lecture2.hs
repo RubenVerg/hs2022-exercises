@@ -530,7 +530,10 @@ Folding" optimization on the given expression.
 -}
 constantFolding :: Expr -> Expr 
 constantFolding expr =
-    removeZero (Add (foldr (\var expr -> removeZero (Add expr (Var var))) (Lit 0) variables) (Lit (sum literals)))
+    if null variables then
+        Lit (sum literals)
+    else
+        removeZero (Add (foldr1 Add $ map Var variables) (Lit (sum literals)))
     where
         removeZero :: Expr -> Expr
         removeZero (Add (Lit 0) b) = b
