@@ -11,6 +11,7 @@ module Utils
 
 {- | GHC 9 comes with @GHC.Utils.Misc.count@, this is GHC 8 tho
 -}
+
 count :: (Foldable t, Num n) => (a -> Bool) -> t a -> n
 count p =
     foldr inner 0
@@ -26,7 +27,6 @@ count2 p q =
         inner x (a', b') | p x        = (a' + 1, b'    )
         inner x (a', b') |        q x = (a'    , b' + 1)
         inner _ (a', b')              = (a', b')
-
 
 infixl 9 !?
 -- As per https://hackage.haskell.org/package/extra-1.7.10/docs/src/Data.List.Extra.html#%21%3F

@@ -66,7 +66,8 @@ sumOfSquares x y = x * x + y * y
 🕯 HINT: use the @mod@ function
 
 -}
-lastDigit :: (Enum a, Show a) =>a -> a
+
+lastDigit :: (Enum a, Show a) => a -> a
 -- | @mod@? NAAH have this /beautiful/ code
 -- Convert @n@ to string, take the last item (via @foldr1@) and convert it back into an int
 lastDigit = toEnum . digitToInt . foldr1 (\_ x -> x) . show
@@ -84,6 +85,7 @@ and 1 is the smallest, and 7 - 1 = 6.
 Try to use local variables (either let-in or where) to implement this
 function.
 -}
+
 minmax :: (Num a, Ord a) => a -> a -> a -> a
 minmax x y z = maximum [x, y, z] - minimum [x, y, z]
 -- I mean, if you reeeally want me to use where:
@@ -148,4 +150,3 @@ lowerAndGreater n list =
         lower :: Integer
         greater :: Integer
         (lower, greater) = count2 (> n) (< n) list
-

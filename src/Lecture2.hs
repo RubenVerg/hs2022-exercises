@@ -48,6 +48,7 @@ module Lecture2
     , constantFolding
     ) where
 
+
 import Utils ((!?), lookupAll, safeSum)
 import Data.Char (isSpace)
 
@@ -134,6 +135,9 @@ As a reward, the knight can take the treasure chest.
 Below is the description of the fight and character specifications:
 
   * A chest contains a non-zero amount of gold and a possible treasure.
+    When defining the type of a treasure chest, you don't know what
+    treasures it stores insight, so your chest data type must be able
+    to contain any possible treasure.
   * As a reward, knight takes all the gold, the treasure and experience.
   * Experience is calculated based on the dragon type. A dragon can be
     either red, black or green.
@@ -385,12 +389,12 @@ dragonFight k d = dragonFight (k { knightEndurance = knightEndurance k - 1 }) (w
 
 
 ----------------------------------------------------------------------------
--- Challenges
+-- Extra Challenges
 ----------------------------------------------------------------------------
 
-{- The following exercises are considered more challenging. However,
-you still may find some of them easier than some of the previous
-ones. Difficulty is a relative concept.
+{- The following exercises are considered optional. Some of them might be more
+challenging. However, you still may find some of them easier than some of the
+previous ones. Difficulty is a relative concept.
 -}
 
 {- | Write a function that takes a list of numbers and returns 'True'
@@ -440,6 +444,7 @@ The algorithm of merge sort is the following:
 >>> mergeSort [3, 1, 2]
 [1,2,3]
 -}
+
 -- Based on @msort@ as implemented in Listing 21.5 of Programming in Scala, Fifth Edition, by Odersky et al.
 mergeSort :: Ord a => [a] -> [a]
 mergeSort [] = []
@@ -449,7 +454,6 @@ mergeSort xs =
     where
         n = div (length xs) 2
         (as, bs) = splitAt n xs
-
 
 {- | Haskell is famous for being a superb language for implementing
 compilers and interpeters to other programming languages. In the next
