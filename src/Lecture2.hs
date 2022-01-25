@@ -34,6 +34,7 @@ module Lecture2
     , Attack (..)
     , Endurance (..)
     , Knight (..)
+    , Treasure (..)
     , dragonFight
 
       -- * Hard
