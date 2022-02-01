@@ -13,5 +13,8 @@ extra-deps:
   - hspec-2.9.4
   - hspec-core-2.9.4
   - hspec-discover-2.9.4
+  - relude-1.0.0.1
+  - composition-1.0.2.2
+  - safe-decimal-0.2.1.0
   - git: https://github.com/chshersh/haskell-hedgehog-classes.git
     commit: 7a46b92ed62cdae73cdca89db28c71a19020c802
