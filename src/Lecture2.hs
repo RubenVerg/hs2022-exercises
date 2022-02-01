@@ -49,11 +49,12 @@ module Lecture2
     , constantFolding
     ) where
 
-
+-- VVV If you need to import libraries, do it after this line ... VVV
 import Utils (lookupAll)
 import Data.Char (isSpace)
 import Relude ((!!?))
 import Numeric.Decimal.BoundedArithmetic (plusBounded)
+-- ^^^ and before this line. Otherwise the test suite might fail  ^^^
 
 {- | Implement a function that finds a product of all the numbers in
 the list. But implement a lazier version of this function: if you see
