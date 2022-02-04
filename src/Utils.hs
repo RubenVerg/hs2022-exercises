@@ -9,7 +9,10 @@ module Utils
     , tailMaybe
     , listOfTwo
     , listOfThree
+    , split
+    , join
     ) where
+import Data.List (intercalate)
 
 {- | GHC 9 comes with @GHC.Utils.Misc.count@, this is GHC 8 tho
 -}
@@ -59,3 +62,14 @@ listOfTwo a b = [a, b]
 
 listOfThree :: a -> a -> a -> [a]
 listOfThree a b c = [a, b, c]
+
+-- https://hackage.haskell.org/package/ghc-9.2.1/docs/src/GHC.Utils.Misc.html#split
+split :: Char -> String -> [String]
+split c s = case rest of
+        []        -> [chunk]
+        _ : rest' -> chunk : split c rest'
+    where (chunk, rest) = break (== c) s
+
+-- @intercalate@ makes sense in the general case but for strings it's a stupid name
+join :: String -> [String] -> String
+join = intercalate
